@@ -34,3 +34,39 @@ When the inserted amount reaches ₹15, the machine dispenses the product.
 
 ## Inputs
 
+clk : system clock
+rst : reset signal
+in : coin input
+01 → ₹5
+10 → ₹10
+
+
+## Outputs
+
+out : product dispense signal
+change : change returned
+
+## Simulation
+
+The design was verified using a Verilog testbench which simulates multiple transaction scenarios such as:
+
+- inserting ₹5 three times
+- inserting ₹5 followed by ₹10
+- inserting ₹10 twice
+- incomplete transactions
+
+Simulation waveform confirms correct state transitions and outputs.
+
+## Tools Used
+
+- Verilog HDL
+- Xilinx Vivado Simulator
+
+## Concepts Used
+
+- Finite State Machines (FSM)
+- Sequential logic
+- State transition design
+- Verilog RTL modeling
+- Testbench based verification
+
