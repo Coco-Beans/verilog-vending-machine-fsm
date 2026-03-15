@@ -10,34 +10,52 @@ module vending_machine_TB;
     #5 clk = ~clk;
   
   initial begin
+    clk = 0;
+    rst = 1;
+    in  = 0;
 
-    // Case 1: Rs 5 + 5 + 5
-    rst = 1; clk = 0;
-    #6 rst = 0; in = 1;
-    #50 $finish;  
+    // Initial reset 
+    #6 rst = 0;
 
-    // Case 2: Rs 5 + 10
-    /* rst = 1; clk = 0;
-    #6 rst = 0; in = 1;
-    #14 in = 2;
-    #25 $finish;*/
+    // Case 1 : 5 + 5 + 5 
+    in = 1;
+    #10 in = 1;
+    #10 in = 1;
 
-    // Case 3: Rs 10 + 10
-    /* rst = 1; clk = 0;
-    #6 rst = 0; in = 2;
-    #50 $finish;*/
+    wait(out == 1);   // dispensed 
+    #2 rst = 1;
+    #6 rst = 0;
+    in = 0;
 
-    // Case 4: Rs 10 + x
-    /* rst = 1; clk = 0;
-    #6 rst = 0; in = 2;
-    #14 in = 0;
-    #25 $finish; */
-    
-  end 
+    // Case 2 : 5 + 10 
+    #10 in = 1;
+    #10 in = 2;
+
+    wait(out == 1);   // dispensed 
+    #2 rst = 1;
+    #6 rst = 0;
+    in = 0;
+
+    // Case 3 : 10 + 10 
+    #10 in = 2;
+    #10 in = 2;
+
+    wait(out == 1);  // dispensed 
+    #2 rst = 1;
+    #6 rst = 0;
+    in = 0;
+
+    // Case 4 : 10 + x 
+    #10 in = 2;
+    #10 in = 0;   // no coin 
+
+    #30; $finish;
+end
+
   
   initial begin
     $dumpfile("vending_machine.vcd");
-    $dumpvars(0, clk, rst, in,out,change);
+    $dumpvars(0, clk, rst, in, out, change);
   end
 
 endmodule
