@@ -70,3 +70,5 @@ Simulation waveform confirms correct state transitions and outputs.
 - Verilog RTL modeling
 - Testbench based verification
 
+## Author
+Laxmi Sathvika Chenna
